@@ -17,17 +17,17 @@
       background-color: #f0f0f0;
       font-family: Arial, sans-serif;
     }
-    .iframe-container {
+    .image-container {
       position: absolute;
       z-index: 10;
-      animation: iframePopout 2s forwards;
+      animation: imagePopout 2s forwards;
     }
-    .iframe-container iframe {
+    .image-container img {
       width: 300px;
       height: 300px;
-      border: none;
+      border-radius: 50%;
     }
-    @keyframes iframePopout {
+    @keyframes imagePopout {
       0% {
         transform: scale(0);
         opacity: 1;
@@ -40,7 +40,7 @@
     .heart {
       position: absolute;
       font-size: 24px;
-      z-index: 5; /* Ensure hearts are behind the iframe */
+      z-index: 5; /* Ensure hearts are behind the image */
       animation: popout 2s infinite;
     }
     @keyframes popout {
@@ -62,8 +62,8 @@
   </style>
 </head>
 <body>
-  <div class="iframe-container">
-    <iframe src="https://raw.githubusercontent.com/PratyushAgrawal09/project/main/WhatsApp%20Image%202024-06-28%20at%2011.03.51%20PM.jpeg"></iframe>
+  <div class="image-container">
+    <img src="https://raw.githubusercontent.com/PratyushAgrawal09/project/main/WhatsApp%20Image%202024-06-28%20at%2011.03.51%20PM.jpeg" alt="Center Image">
   </div>
   <audio autoplay loop>
     <source src="your-music-file.mp3" type="audio/mpeg">
@@ -92,7 +92,7 @@
       }, 2000);
     }
 
-    // Start creating hearts after the iframe animation completes (2s)
+    // Start creating hearts after the image animation completes (2s)
     setTimeout(() => {
       setInterval(createHeart, 100);
     }, 2000);
