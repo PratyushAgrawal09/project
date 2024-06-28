@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heart Popout Animation</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+    .iframe-container {
+      position: absolute;
+      z-index: 10;
+      animation: iframePopout 2s forwards;
+    }
+    .iframe-container iframe {
+      width: 300px;
+      height: 300px;
+      border: none;
+    }
+    @keyframes iframePopout {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      z-index: 5; /* Ensure hearts are behind the iframe */
+      animation: popout 2s infinite;
+    }
+    @keyframes popout {
+      0% {
+        transform: scale(0) translate(0, 0);
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1) translate(calc(var(--x) * 1px), calc(var(--y) * 1px));
+        opacity: 0;
+      }
+    }
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="iframe-container">
+    <iframe src="https://www.example.com"></iframe>
+  </div>
+  <audio autoplay loop>
+    <source src="your-music-file.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <script>
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤️';
+      document.body.appendChild(heart);
+
+      const x = Math.random() * 600 - 300; // random x position between -300 and 300
+      const y = Math.random() * 600 - 300; // random y position between -300 and 300
+
+      heart.style.setProperty('--x', x);
+      heart.style.setProperty('--y', y);
+
+      heart.style.left = '50%';
+      heart.style.top = '50%';
+      heart.style.marginLeft = '-12px';
+      heart.style.marginTop = '-12px';
+
+      setTimeout(() => {
+        heart.remove();
+      }, 2000);
+    }
+
+    // Start creating hearts after the iframe animation completes (2s)
+    setTimeout(() => {
+      setInterval(createHeart, 100);
+    }, 2000);
+  </script>
+</body>
+</html>
