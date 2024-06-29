@@ -12,20 +12,28 @@
       height: 100%;
       overflow: hidden;
       display: flex;
+      flex-direction: column; /* Ensures elements stack vertically */
       align-items: center;
       justify-content: center;
       background-color: #f0f0f0;
       font-family: Arial, sans-serif;
     }
     .image-container {
-      position: absolute;
+      position: relative;
       z-index: 10;
       animation: imagePopout 2s forwards;
+      border: 5px solid #fff; /* White border */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      border-radius: 15px; /* Rounded corners */
+      margin-bottom: 20px; /* Space between image and quote */
     }
     .image-container img {
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
+      width: 80vw; /* Responsive width */
+      max-width: 300px;
+      height: auto;
+      border-radius: 15px; /* Rounded corners */
+      z-index: 11; /* Ensure the image is on top of hearts */
+      position: relative;
     }
     @keyframes imagePopout {
       0% {
@@ -41,20 +49,28 @@
       position: absolute;
       font-size: 24px;
       z-index: 5; /* Ensure hearts are behind the image */
-      animation: popout 2s infinite;
+      animation: popout 2s forwards;
     }
     @keyframes popout {
       0% {
-        transform: scale(0) translate(0, 0);
+        transform: scale(0);
         opacity: 1;
       }
       50% {
         opacity: 0.8;
       }
       100% {
-        transform: scale(1) translate(calc(var(--x) * 1px), calc(var(--y) * 1px));
+        transform: scale(1) translate(0, -100px);
         opacity: 0;
       }
+    }
+    .quote-container {
+      text-align: center;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      max-width: 80%; /* Limit width for responsiveness */
     }
     audio {
       display: none;
@@ -63,27 +79,37 @@
 </head>
 <body>
   <div class="image-container">
-    <img src="https://raw.githubusercontent.com/PratyushAgrawal09/project/main/WhatsApp%20Image%202024-06-28%20at%2011.03.51%20PM.jpeg" alt="Center Image">
+    <img src="https://raw.githubusercontent.com/PratyushAgrawal09/project/main/IMG-20240629-WA0077.jpg" alt="Center Image">
+    <div class="hearts-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%;">
+      <!-- Hearts will be generated here -->
+    </div>
   </div>
-  <audio autoplay loop>
-    <source src="your-music-file.mp3" type="audio/mpeg">
+  <div class="quote-container">
+    <p>"Insert your quote here"</p>
+    <p>- Author</p>
+  </div>
+  <audio id="bg-music" autoplay loop>
+    <source src="https://github.com/PratyushAgrawal09/project/raw/main/%5Bdownloader.vevioz.com%5D%20Meri%20Pyaari%20Ammi.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
   <script>
+    const bgMusic = document.getElementById('bg-music');
+    bgMusic.currentTime = 19; // Start playback from 19 seconds
+
     function createHeart() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
       heart.innerHTML = '❤️';
-      document.body.appendChild(heart);
+      document.querySelector('.hearts-container').appendChild(heart);
 
-      const x = Math.random() * 600 - 300; // random x position between -300 and 300
-      const y = Math.random() * 600 - 300; // random y position between -300 and 300
+      const angle = Math.random() * 2 * Math.PI; // Random angle between 0 and 2PI
+      const radius = Math.random() * 150 + 50; // Random radius between 50 and 200
 
-      heart.style.setProperty('--x', x);
-      heart.style.setProperty('--y', y);
+      const x = Math.cos(angle) * radius; // X position in the circle
+      const y = Math.sin(angle) * radius; // Y position in the circle
 
-      heart.style.left = '50%';
-      heart.style.top = '50%';
+      heart.style.left = `calc(50% + ${x}px)`;
+      heart.style.top = `calc(50% + ${y}px)`;
       heart.style.marginLeft = '-12px';
       heart.style.marginTop = '-12px';
 
@@ -92,10 +118,8 @@
       }, 2000);
     }
 
-    // Start creating hearts after the image animation completes (2s)
-    setTimeout(() => {
-      setInterval(createHeart, 100);
-    }, 2000);
+    // Start creating hearts immediately
+    setInterval(createHeart, 300); // Increase the rate of generation
   </script>
 </body>
 </html>
