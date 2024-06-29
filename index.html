@@ -22,29 +22,29 @@
       position: relative;
       z-index: 10;
       animation: imagePopout 2s forwards;
-      border: 5px solid #fff; /* White border */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-      border-radius: 15px; /* Rounded corners */
-      margin-bottom: 20px; /* Space between elements */
+      border: 5px solid #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      margin-bottom: 20px;
     }
     .image-container img {
-      width: 80vw; /* Responsive width */
+      width: 80vw;
       max-width: 300px;
       height: auto;
-      border-radius: 15px; /* Rounded corners */
-      z-index: 11; /* Ensure the image is on top of hearts */
+      border-radius: 15px;
+      z-index: 11;
       position: relative;
     }
     .second-image-container {
-      width: 80vw; /* Responsive width */
+      width: 80vw;
       max-width: 300px;
-      margin-bottom: 20px; /* Space between elements */
+      margin-bottom: 20px;
     }
     .second-image-container img {
-      width: 100%; /* Full width */
+      width: 100%;
       height: auto;
-      border-radius: 15px; /* Rounded corners */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     @keyframes imagePopout {
       0% {
@@ -59,7 +59,7 @@
     .heart {
       position: absolute;
       font-size: 24px;
-      z-index: 5; /* Ensure hearts are behind the image */
+      z-index: 5;
       animation: popout 2s forwards;
     }
     @keyframes popout {
@@ -91,12 +91,20 @@
     <img src="https://raw.githubusercontent.com/PratyushAgrawal09/project/main/IMG-20240629-WA0079(1).jpg" alt="Second Image">
   </div>
   <audio id="bg-music" autoplay loop>
-    <source src="https://github.com/PratyushAgrawal09/project/raw/main/%5Bdownloader.vevioz.com%5D%20Meri%20Pyaari%20Ammi.wav" type="audio/wav">
+    <source src="https://github.com/PratyushAgrawal09/project/raw/main/%5Bdownloader.vevioz.com%5D%20Meri%20Pyaari%20Ammi.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
   <script>
     const bgMusic = document.getElementById('bg-music');
-    bgMusic.currentTime = 96; // Start playback from 19 seconds
+    bgMusic.currentTime = 19; // Start playback from 19 seconds
+
+    bgMusic.addEventListener('play', () => {
+      console.log('Audio is playing');
+    });
+
+    bgMusic.addEventListener('error', (e) => {
+      console.error('Audio failed to play', e);
+    });
 
     function createHeart() {
       const heart = document.createElement('div');
@@ -104,11 +112,11 @@
       heart.innerHTML = '❤️';
       document.querySelector('.hearts-container').appendChild(heart);
 
-      const angle = Math.random() * 2 * Math.PI; // Random angle between 0 and 2PI
-      const radius = Math.random() * 150 + 50; // Random radius between 50 and 200
+      const angle = Math.random() * 2 * Math.PI;
+      const radius = Math.random() * 150 + 50;
 
-      const x = Math.cos(angle) * radius; // X position in the circle
-      const y = Math.sin(angle) * radius; // Y position in the circle
+      const x = Math.cos(angle) * radius;
+      const y = Math.sin(angle) * radius;
 
       heart.style.left = `calc(50% + ${x}px)`;
       heart.style.top = `calc(50% + ${y}px)`;
@@ -120,7 +128,6 @@
       }, 2000);
     }
 
-    // Start creating hearts immediately
     setInterval(createHeart, 50); // Increase the rate of generation
   </script>
 </body>
