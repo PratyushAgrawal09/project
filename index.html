@@ -12,7 +12,7 @@
       height: 100%;
       overflow: hidden;
       display: flex;
-      flex-direction: column; /* Ensures elements stack vertically */
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       background-color: #f0f0f0;
@@ -25,7 +25,7 @@
       border: 5px solid #fff; /* White border */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
       border-radius: 15px; /* Rounded corners */
-      margin-bottom: 20px; /* Space between image and quote */
+      margin-bottom: 20px; /* Space between elements */
     }
     .image-container img {
       width: 80vw; /* Responsive width */
@@ -34,6 +34,17 @@
       border-radius: 15px; /* Rounded corners */
       z-index: 11; /* Ensure the image is on top of hearts */
       position: relative;
+    }
+    .second-image-container {
+      width: 80vw; /* Responsive width */
+      max-width: 300px;
+      margin-bottom: 20px; /* Space between elements */
+    }
+    .second-image-container img {
+      width: 100%; /* Full width */
+      height: auto;
+      border-radius: 15px; /* Rounded corners */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     }
     @keyframes imagePopout {
       0% {
@@ -64,14 +75,6 @@
         opacity: 0;
       }
     }
-    .quote-container {
-      text-align: center;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-      max-width: 80%; /* Limit width for responsiveness */
-    }
     audio {
       display: none;
     }
@@ -84,9 +87,8 @@
       <!-- Hearts will be generated here -->
     </div>
   </div>
-  <div class="quote-container">
-    <p>"Insert your quote here"</p>
-    <p>- Author</p>
+  <div class="second-image-container">
+    <img src="https://raw.githubusercontent.com/PratyushAgrawal09/project/main/IMG-20240629-WA0079(1).jpg" alt="Second Image">
   </div>
   <audio id="bg-music" autoplay loop>
     <source src="https://github.com/PratyushAgrawal09/project/raw/main/%5Bdownloader.vevioz.com%5D%20Meri%20Pyaari%20Ammi.mp3" type="audio/mpeg">
@@ -94,7 +96,7 @@
   </audio>
   <script>
     const bgMusic = document.getElementById('bg-music');
-    bgMusic.currentTime = 19; // Start playback from 19 seconds
+    bgMusic.currentTime = 96; // Start playback from 19 seconds
 
     function createHeart() {
       const heart = document.createElement('div');
@@ -119,7 +121,7 @@
     }
 
     // Start creating hearts immediately
-    setInterval(createHeart, 300); // Increase the rate of generation
+    setInterval(createHeart, 50); // Increase the rate of generation
   </script>
 </body>
 </html>
