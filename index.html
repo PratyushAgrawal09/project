@@ -26,6 +26,7 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       border-radius: 15px;
       margin-bottom: 20px;
+      cursor: pointer;
     }
     .image-container img {
       width: 80vw;
@@ -81,7 +82,7 @@
   </style>
 </head>
 <body>
-  <div class="image-container">
+  <div class="image-container" id="play-pause-button">
     <img src="https://raw.githubusercontent.com/PratyushAgrawal09/project/main/IMG-20240629-WA0077.jpg" alt="Center Image">
     <div class="hearts-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%;">
       <!-- Hearts will be generated here -->
@@ -90,16 +91,24 @@
   <div class="second-image-container">
     <img src="https://raw.githubusercontent.com/PratyushAgrawal09/project/main/IMG-20240629-WA0079(1).jpg" alt="Second Image">
   </div>
-  <audio id="bg-music" autoplay loop>
+  <audio id="bg-music" loop>
     <source src="https://raw.githubusercontent.com/PratyushAgrawal09/project/main/[downloader.vevioz.com] Meri Pyaari Ammi.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
   <script>
     const bgMusic = document.getElementById('bg-music');
-    bgMusic.currentTime = 19; // Start playback from 19 seconds
+    const playPauseButton = document.getElementById('play-pause-button');
 
-    bgMusic.addEventListener('play', () => {
-      console.log('Audio is playing');
+    bgMusic.currentTime = 96; // Start playback from 19 seconds
+
+    playPauseButton.addEventListener('click', () => {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        console.log('Audio is playing');
+      } else {
+        bgMusic.pause();
+        console.log('Audio is paused');
+      }
     });
 
     bgMusic.addEventListener('error', (e) => {
